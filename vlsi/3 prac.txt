@@ -1,0 +1,34 @@
+--------- VHDL code ---------
+library IEEE;
+use IEEE.std_logic_1164.all;
+use IEEE.std_logic_arith.all;
+use IEEE.std_logic_unsigned.all;
+use IEEE.numeric_std.all;
+
+entity mod_N is
+generic (N : integer := 10);
+port (	clk : in std_logic;
+	rst : in std_logic;
+	count : out std_logic_vector(3 downto 0)
+	);
+end mod_N;
+
+architecture behavioral of mod_N is
+signal temp_count : integer range 0 to N-1 := 0;
+
+begin 
+process (clk, rst)
+begin
+if (rst = '1') then
+temp_count <= 0;
+elsif rising_edge(clk) then
+if temp_count = N-1 then
+temp_count <= 0;
+else 
+temp_count <= temp_count + 1;
+end if;
+end if;
+end process;
+
+count <= std_logic_vector(to_unsigned(temp_count, count'length));
+end behavioral;

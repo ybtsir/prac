@@ -1,0 +1,149 @@
+--------- VHDL code ---------
+library IEEE;
+use IEEE.std_logic_1164.all;
+
+entity usr is
+Port( 	Si : in std_logic;
+	So : out std_logic;
+	Pi : in std_logic_vector(3 downto 0);
+	Po : out std_logic_vector(3 downto 0);
+	clk : in std_logic;
+	rst : in std_logic;
+	load : in std_logic;
+	mode : in std_logic_vector(1 downto 0)
+	);
+end usr;
+
+architecture behavioral of usr is
+signal temp : std_logic_vector(3 downto 0);
+signal clkout : std_logic;
+signal counter : integer range 0 to 49999999;
+
+process(clk, rst)
+begin
+if rst <= '1' then
+clkout <= '0';
+counter <= 0;
+elsif(clk'event and clk='1') then
+if (counter <= 49999999) then 
+clkout <= not clkout;
+counter <= 0;
+else
+counter <= counter + 1;
+end if;
+end if;
+end process;
+
+process(clkout, rst)
+begin
+if rst <= '1' then
+So <= '0';
+Po <= "0000";
+
+elsif(clkout'event and clkout='1') then
+case mode is
+when "00" =>
+Po <= Pi;
+So <= '0';
+
+when "01" =>
+temp(0) <= Si;
+temp(1) <= temp(0);
+temp(2) <= temp(1);
+temp(3) <= temp(2);
+So <= temp(3);
+Po <= "0000";
+
+when "10" =>
+if(load = '1') then
+temp <= Pi;
+else
+temp(2) <= temp(3);
+temp(1) <= temp(2);
+temp(0) <= temp(1);
+So <= temp(0);
+end if;
+
+when others =>
+if(load = '0') then
+temp(0) <= Si;
+temp(1) <= temp(0);
+temp(2) <= temp(1);
+temp(3) <= temp(2);
+else
+Po <= temp;
+end if;
+
+end case; 
+end if;
+end process;
+end behavioral;
+
+
+
+
+--------- testbench ---------
+library IEEE;
+use IEEE.std_logic_1164.all;
+
+entity usr_tb is
+end usr_tb;
+
+architecture behavioral of usr_tb is
+component usr is
+Port( 	Si : in std_logic;
+	So : out std_logic;
+	Pi : in std_logic_vector(3 downto 0);
+	Po : out std_logic_vector(3 downto 0);
+	clk : in std_logic;
+	rst : in std_logic;
+	load : in std_logic;
+	mode : in std_logic_vector(1 downto 0)
+	);
+end component;
+
+signal Pi : std_logic_vector(3 downto 0) := "0000";
+signal Po : std_logic_vector(3 downto 0) := "0000";
+signal mode : std_logic_vector(1 downto 0) := "00";
+signal Si : std_logic;
+signal So : std_logic;
+signal clk : std_logic;
+signal rst : std_logic;
+signal load : std_logic;
+constant clk_period : time := 10ns;
+
+begin 
+uut: usr port map(Pi=>Pi, Po=>Po, Si=>Si, So=>So, clk=>clk, rst=>rst, load=>load, mode=>mode);
+
+label1 : process
+begin
+clk <= '0';
+wait for clk_period/2;
+clk <= '1';
+wait for clk_period/2;
+end process;
+
+process
+begin
+rst <= '1';
+wait for 10ns;
+rst <= '0';
+
+mode <= "00";
+Pi <= "1010";
+wait for 20ns;
+
+mode <= "01";
+Si <= '1';
+wait for 20ns;
+
+mode <= "10";
+load <= '0';
+wait for 40ns;
+
+mode <= "11";
+load <= '0';
+wait for 10ns;
+
+end process;
+end behavioral;
