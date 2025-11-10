@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Countdown Timer</title>
+  <script type="text/javascript">
+    function startCountdown() {
+      var seconds = parseInt(prompt("Enter countdown time in seconds:"));
+      if (isNaN(seconds) || seconds <= 0) {
+        alert("Please enter a valid positive number!");
+        return;
+      }
+      var timerDisplay = document.getElementById("timer");
+      var countdown = setInterval(function () {
+        timerDisplay.innerHTML = seconds + " seconds remaining";
+        seconds--;
+
+        if (seconds < 0) {
+          clearInterval(countdown);
+          timerDisplay.innerHTML = "⏰ Time's up!";
+        }
+      }, 1000); // update every 1 second
+    }
+  </script>
+</head>
+<body onload="startCountdown()">
+  <h1>Countdown Timer</h1>
+  <h2 id="timer"></h2>
+</body>
+</html>

@@ -1,0 +1,55 @@
+<html> 
+<head> 
+     <h6>AREA OF RECTANGLE</h6> 
+</head> 
+  <body> 
+          <script> 
+           var l=prompt("Enter Length"); 
+           var b=prompt("Enter Breadth");           
+var area= l*b; 
+           document.write("area of rectangle is:"+area); 
+      
+           </script> 
+</body> 
+</html> 
+
+
+
+<html>
+<head>
+    <title>AREA OF TRIANGLE</title>
+     <h6> AREA OF TRIANGLE</h6>
+</head>
+<body>
+           <script>
+           var b=5;
+           var h=6;
+           var area=0.5*b*h;
+           document.write("area of triangle:"+area);
+           </script>
+</body>
+</html>
+
+
+
+
+<html>
+<head>
+<title>  CIRCLE </title>
+<script type="text/javascript">
+	function Area_circle()
+	{
+	var r=prompt("Enter the radius:");
+	var area =r*r*3.14;
+	document.write("Radius: "+r+"<br>")
+	document.write("Area of circle: "+area)
+	}
+</script>
+</head>
+<body>
+<h1> AREA OF CIRCLE </h1>
+	<script type="text/javascript">
+	Area_circle();
+	</script>
+</body>
+</html>

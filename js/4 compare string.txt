@@ -1,0 +1,25 @@
+<html>
+<head>
+        <title>  practical4</title>
+<h1> String Comparision</h1>
+        <script>
+function compareString(){
+var str1 = prompt("Enter first string:");
+var str2 = prompt("Enter second string:");
+document.write("String 1: " + str1 + "<br>");
+document.write("String 2: " + str2 + "<br>");
+
+    if(str1==str2){
+  document.write("yes the strings are equal"+"<br>");
+          }
+        else{
+      document.write("the strings are not equal"+"<br>");
+        }
+    document.write("Using localeCompare() : " + str1.localeCompare(str2) +"<br>")
+}
+</script>
+</head>
+<body>
+      <button onclick=" compareString()">Compare String</button>
+</body>
+</html>

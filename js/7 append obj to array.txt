@@ -1,0 +1,46 @@
+<!DOCTYPE HTML> 
+<html> 
+<head> 
+<title> ARRAY FUNCTIONS </title> 
+</head> 
+<body> 
+<h1>Array Operations</h1> 
+<label for="array-input">Enter array elements (comma separated): </label> 
+<input type="text" id="array-input" placeholder="e.g., 1, 2, 3, 4"> 
+<button onclick="updateArray()">Submit Array</button> 
+<div id="result"></div> 
+<h3>Choose an Array Operation</h3> 
+<button onclick="checkElement()">Check Element</button> 
+<button onclick="removeElement()">Remove Element</button> 
+<button onclick="clearArray()">Clear Array</button> 
+<script> 
+let array = []; 
+function updateArray() { 
+const input = document.getElementById('array-input').value; 
+array = input.split(',').map(num => parseInt(num.trim())).filter(num => !isNaN(num)); 
+displayResult(`Array updated: [${array.join(', ')}]`); 
+} 
+function displayResult(message) { 
+document.getElementById('result').innerHTML = message; 
+} 
+} 
+} 
+</script> 
+</body> 
+function removeElement() { 
+array.splice(2,1); 
+displayResult(`Specified element removed. New array: [${array.join(', ')}]`); 
+function clearArray() { 
+array.length=0; 
+displayResult("Array cleared."); 
+function checkElement() { 
+let inputEle= prompt("Enter element to check:"); 
+let ele=Number(inputEle); 
+if(array.includes(ele)){ 
+displayResult(ele+" :Element found!"); 
+} 
+else{ 
+displayResult(ele+" :Element not Found!"); 
+} 
+} 
+</html> 

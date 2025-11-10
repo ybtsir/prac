@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Palindrome Checker</title>
+    <script>
+        function checkPalindrome() {
+            var str = prompt("Enter a string to check palindrome:");
+            var reversed = str.split('').reverse().join('');
+            var isPalindrome = str.toLowerCase() === reversed.toLowerCase();
+
+            document.write("Entered String: " + str + "<br>");
+            document.write("Is Palindrome?: " + (isPalindrome ? "Yes" : "No") + "<br>");
+
+            if (isPalindrome) {
+                // Show button to display palindrome exactly as entered
+                document.write('<button onclick="generatePalindrome(\'' + str + '\')">Generate Palindrome</button>');
+            }
+        }
+
+        function generatePalindrome(str) {
+            // Since it's palindrome, just show it as is with original case
+            document.write("<br>Generated Palindrome: " + str);
+        }
+    </script>
+</head>
+<body onload="checkPalindrome()">
+</body>
+</html>

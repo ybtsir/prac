@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Practical 9 - Events</title>
+  <script>
+    // Change background on mouse over
+    function changeOnMouseOver() {
+      document.body.style.backgroundColor = "lightblue";
+    }
+
+    // Change background on input focus
+    function changeOnFocus() {
+      document.body.style.backgroundColor = "lightgreen";
+    }
+
+    // Reset background to white
+    function resetBackground() {
+      document.body.style.backgroundColor = "white";
+    }
+  </script>
+</head>
+<body>
+  <h1>Welcome to My Home Page</h1>
+
+  <!-- Mouse over event -->
+  <p onmouseover="changeOnMouseOver()" onmouseleave="resetBackground()">
+    Hover over this text to change background color.
+  </p>
+
+  <!-- Focus event -->
+  <p>
+    Enter your name:
+    <input type="text" onfocus="changeOnFocus()" onblur="resetBackground()">
+  </p>
+</body>
+</html>

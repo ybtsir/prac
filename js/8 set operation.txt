@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>   
+    <title>Set Operations</title>
+</head>
+<body>
+    <h1>Set Operations</h1>
+    <label for="setA">Enter elements for Set A (comma-separated):</label><br>
+    <input type="text" id="setA" placeholder="e.g. 1,2,3,4"><br><br>
+    <label for="setB">Enter elements for Set B (comma-separated):</label><br>
+    <input type="text" id="setB" placeholder="e.g. 3,4,5,6"><br><br>
+    <label for="operation">Select Operation:</label>
+    <select id="operation">
+        <option value="union">Union</option>
+        <option value="intersection">Intersection</option>
+        <option value="difference1">Difference1</option>
+	<option value="difference2">Difference2</option>
+    </select><br><br>
+    <button onclick="performOperation()">Perform Set Operations</button>
+    <h3>Result:</h3>
+    <p id="result"></p>
+    <script>
+        function performOperation() {
+            // Get user input
+            let setA = document.getElementById('setA').value.split(',').map(num => num.trim());
+            let setB = document.getElementById('setB').value.split(',').map(num => num.trim());
+            // Convert arrays to sets
+            let set1 = new Set(setA);
+            let set2 = new Set(setB);
+            // Get the selected operation
+            let operation = document.getElementById('operation').value;
+            let result;
+            // Perform the set operation based on the user's choice
+            switch (operation) {
+                case 'union':
+                    result = union(set1, set2);
+                    break;
+                case 'intersection':
+                    result = intersection(set1, set2);
+                    break;
+                case 'difference1':
+                    result = difference1(set1, set2);
+                    break;
+		case 'difference2':
+                    result = difference2(set1, set2);
+                    break;
+                default:
+                    result = 'Invalid operation';
+            }
+            // Display the result
+            document.getElementById('result').innerText = `Result: ${[...result].join(', ')}`;
+        }
+        // Function for Union
+        function union(set1, set2) {
+            return new Set([...set1, ...set2]);
+        }
+        // Function for Intersection
+        function intersection(set1, set2) {
+            let result = new Set();
+            set1.forEach(item => {
+                if (set2.has(item)) {
+                    result.add(item);
+                }
+            });
+            return result;
+        }
+        // Function for Difference
+        function difference1(set1, set2) {
+            let result = new Set();
+            set1.forEach(item => {
+                if (!set2.has(item)) {
+                    result.add(item);
+                }
+            });
+            return result;
+        }
+	// Function for Difference
+        function difference2(set1, set2) {
+            let result = new Set();
+            set2.forEach(item => {
+                if (!set1.has(item)) {
+                    result.add(item);
+                }
+            });
+            return result;
+        }
+    </script>
+</body>
+</html>
