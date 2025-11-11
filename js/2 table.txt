@@ -29,5 +29,10 @@
 </script> 
 </head> 
 <body> 
+<h1> Multiplication table</h1> 
+<button onclick = "multiTable_ForLoop()"> using for_loop </button> 
+<button onclick = "multiTable_WhileLoop()"> using while_loop </button> 
+<button onclick = "multiTable_DoWhileLoop()"> using do_while_loop </button>
 </body> 
+
 </html>
